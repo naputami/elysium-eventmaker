@@ -1,6 +1,10 @@
+"use client";
 import { TicketIcon } from "@/components/ticketicon";
+import { registerAction } from "./action";
+import { useActionState } from "react";
 
 export default function page() {
+  const [state, formAction, pending] = useActionState(registerAction, null);
   return (
     <div className="bg-indigo-950 w-screen h-screen grid md:grid-cols-2">
       <div className="hidden md:grid space-y-32 px-10 py-8">
@@ -15,7 +19,7 @@ export default function page() {
       </div>
       <div className="bg-white border-l rounded-s-3xl px-16 space-y-8 py-24">
         <div className="text-indigo-900 text-3xl font-bold">Create Account</div>
-        <form className="space-y-3">
+        <form action={formAction} className="space-y-3">
           <div>
             <label className="form-control w-full max-w-sm">
               <div className="label">
@@ -24,10 +28,10 @@ export default function page() {
                 </span>
               </div>
               <input
-                name="fullname"
+                name="name"
                 type="text"
                 placeholder="Enter your full name"
-                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm"
+                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
             </label>
           </div>
@@ -40,9 +44,9 @@ export default function page() {
               </div>
               <input
                 name="email"
-                type="text"
+                type="email"
                 placeholder="Enter your e-mail"
-                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm"
+                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
             </label>
           </div>
@@ -55,17 +59,25 @@ export default function page() {
               </div>
               <input
                 name="password"
-                type="text"
+                type="password"
                 placeholder="Enter password"
-                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm"
+                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
             </label>
           </div>
           <div>
-            <button className="w-full bg-indigo-950 max-w-sm py-2 border rounded-full text-white my-4">
+            <button
+              disabled={pending}
+              className="w-full bg-indigo-950 max-w-sm py-2 border rounded-full text-white my-4 disabled:opacity-50"
+            >
               Create Account
             </button>
           </div>
+          {state?.status === "success" ? (
+            <div className="bg-emerald-50 text-emerald-600 text-sm p-2 flex justify-center items-center">
+              Register success
+            </div>
+          ) : null}
         </form>
         <div className="flex items-center gap-1">
           <div>Already have an account?</div>{" "}
