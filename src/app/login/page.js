@@ -4,6 +4,7 @@ import { loginAction } from "./action";
 import { useActionState } from "react";
 
 export default function Page() {
+export default function Page() {
   const [state, formAction, pending] = useActionState(loginAction, null);
   return (
     <div className="bg-indigo-950 w-screen h-screen grid md:grid-cols-2">
