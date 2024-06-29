@@ -3,7 +3,7 @@ import { TicketIcon } from "@/components/ticketicon";
 import { registerAction } from "./action";
 import { useActionState } from "react";
 
-export default function page() {
+export default function Page() {
   const [state, formAction, pending] = useActionState(registerAction, null);
   return (
     <div className="bg-indigo-950 w-screen h-screen grid md:grid-cols-2">
