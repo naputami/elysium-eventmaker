@@ -2,9 +2,14 @@
 import { TicketIcon } from "@/components/ticketicon";
 import { registerAction } from "./action";
 import { useActionState } from "react";
+import { toast } from "react-hot-toast";
+import { useEffect } from "react";
 
-export default function page() {
+export default function Page() {
   const [state, formAction, pending] = useActionState(registerAction, null);
+  useEffect(() => {
+    if (state?.message) toast.error(state.message);
+  }, [state]);
   return (
     <div className="bg-indigo-950 w-screen h-screen grid md:grid-cols-2">
       <div className="hidden md:grid space-y-32 px-10 py-8">
@@ -30,6 +35,7 @@ export default function page() {
               <input
                 name="name"
                 type="text"
+                defaultValue={state?.data?.name}
                 placeholder="Enter your full name"
                 className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
@@ -45,6 +51,7 @@ export default function page() {
               <input
                 name="email"
                 type="email"
+                defaultValue={state?.data?.email}
                 placeholder="Enter your e-mail"
                 className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
@@ -60,6 +67,7 @@ export default function page() {
               <input
                 name="password"
                 type="password"
+                defaultValue={state?.data?.password}
                 placeholder="Enter password"
                 className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
@@ -79,9 +87,13 @@ export default function page() {
             </div>
           ) : null}
         </form>
-        <div className="flex items-center gap-1">
-          <div>Already have an account?</div>{" "}
-          <button className="text-indigo-600">Log In</button>
+        <div>
+          <p className="text-gray-500">
+            Already have an account?{" "}
+            <a href="/login">
+              <span className="text-indigo-900">Login</span>
+            </a>
+          </p>
         </div>
       </div>
     </div>

@@ -15,7 +15,8 @@
     "next": "15.0.0-canary.42",
     "prisma": "^5.16.1",
     "react": "19.0.0-rc-3563387fe3-20240621",
-    "react-dom": "19.0.0-rc-3563387fe3-20240621"
+    "react-dom": "19.0.0-rc-3563387fe3-20240621",
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
     "daisyui": "^4.12.8",
