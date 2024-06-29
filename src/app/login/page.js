@@ -3,7 +3,7 @@ import { TicketIcon } from "@/components/ticketicon";
 import { loginAction } from "./action";
 import { useActionState } from "react";
 
-export default function page() {
+export default function Page() {
   const [state, formAction, pending] = useActionState(loginAction, null);
   return (
     <div className="bg-indigo-950 w-screen h-screen grid md:grid-cols-2">
@@ -72,7 +72,7 @@ export default function page() {
           ) : null}
         </form>
         <div className="flex items-center gap-1">
-          <div className="text-indigo-900">Don't have an account?</div>
+          <div className="text-indigo-900">Don&apos;t have an account?</div>
           <button className="text-indigo-600 ">Sign up</button>
         </div>
       </div>
