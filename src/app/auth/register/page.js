@@ -1,10 +1,19 @@
 "use client";
 import { TicketIcon } from "@/components/ticketicon";
-import { loginAction } from "./action";
+import { registerAction } from "./action";
 import { useActionState } from "react";
+import { toast } from "react-hot-toast";
+import { useEffect } from "react";
 
 export default function Page() {
-  const [state, formAction, pending] = useActionState(loginAction, null);
+  const [state, formAction, pending] = useActionState(registerAction, null);
+  useEffect(() => {
+    if (state?.status === "error") {
+      toast.error(state.message);
+    } else if (state?.status === "success") {
+      toast.success(state?.message);
+    }
+  }, [state]);
   return (
     <div className="bg-indigo-950 w-screen h-screen grid md:grid-cols-2">
       <div className="hidden md:grid space-y-32 px-10 py-8">
@@ -17,9 +26,25 @@ export default function Page() {
           today!
         </div>
       </div>
-      <div className="bg-white border-l rounded-s-3xl px-16 space-y-8 py-24">
-        <div className="text-indigo-900 text-3xl font-bold">Login</div>
+      <div className="bg-white border-l rounded-s-3xl px-16 space-y-6 py-24">
+        <div className="text-indigo-900 text-3xl font-bold">Create Account</div>
         <form action={formAction} className="space-y-3">
+          <div>
+            <label className="form-control w-full max-w-sm">
+              <div className="label">
+                <span className="label-text text-slate-600 text-sm">
+                  Full Name
+                </span>
+              </div>
+              <input
+                name="name"
+                type="text"
+                defaultValue={state?.data?.name}
+                placeholder="Enter your full name"
+                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
+              />
+            </label>
+          </div>
           <div>
             <label className="form-control w-full max-w-sm">
               <div className="label">
@@ -29,10 +54,10 @@ export default function Page() {
               </div>
               <input
                 name="email"
-                defaultValue={state?.data?.email}
                 type="email"
+                defaultValue={state?.data?.email}
                 placeholder="Enter your e-mail"
-                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600"
+                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
             </label>
           </div>
@@ -45,10 +70,10 @@ export default function Page() {
               </div>
               <input
                 name="password"
-                defaultValue={state?.data?.password}
                 type="password"
+                defaultValue={state?.data?.password}
                 placeholder="Enter password"
-                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600"
+                className="input input-bordered w-full max-w-sm border border-slate-400 rounded-lg h-10 px-4 text-sm text-slate-600 "
               />
             </label>
           </div>
@@ -57,23 +82,17 @@ export default function Page() {
               disabled={pending}
               className="w-full bg-indigo-950 max-w-sm py-2 border rounded-full text-white my-4 disabled:opacity-50"
             >
-              Login
+              Create Account
             </button>
           </div>
-          {state?.status === "success" ? (
-            <div className="bg-emerald-50 text-emerald-600 text-sm p-2 flex justify-center items-center w-full max-w-sm">
-              {state.message}
-            </div>
-          ) : null}
-          {state?.status === "error" ? (
-            <div className="bg-rose-50 text-rose-600 text-sm p-2 flex justify-center items-center w-full max-w-sm">
-              {state.message}
-            </div>
-          ) : null}
         </form>
-        <div className="flex items-center gap-1">
-          <div className="text-indigo-900">Don&apos;t have an account?</div>
-          <button className="text-indigo-600 ">Sign up</button>
+        <div>
+          <p className="text-gray-500">
+            Already have an account?{" "}
+            <a href="/auth/login">
+              <span className="text-indigo-900">Login</span>
+            </a>
+          </p>
         </div>
       </div>
     </div>
