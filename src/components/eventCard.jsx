@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
-export const EventCard = ({ event }) => {
+const EventCard = ({ event }) => {
   return (
-    <Link href={`/${event.id}`}>
-      <main className="relative h-72 rounded-xl bg-yellow-300 transition duration-150 hover:bg-yellow-400 hover:shadow-xl">
+      <Link href={`/${event.id}`}>
+      <main className="relative h-72 rounded-xl bg-white transition duration-150 hover:bg-slate-100 hover:shadow-xl">
         <Image
           alt="event image"
           src={`${process.env.R2_PUBLIC_URL}/eventmakers/${event.id}/${event.image}`}
@@ -16,8 +15,8 @@ export const EventCard = ({ event }) => {
           {event.date}
         </div>
         <div className="absolute bottom-0 left-0 p-6">
-          <h1 className="text-lg font-semibold text-black">{event.name}</h1>
-          <p className="text-black">{event.author.name}</p>
+          <h1 className="text-lg font-semibold text-black">{event.title}</h1>
+          <p className="text-black">{event.location}</p>
           <p className="mt-2 text-sm font-semibold tracking-tight text-slate-700">
             {event.participants.length > 0
               ? `${event.participants.length} has
