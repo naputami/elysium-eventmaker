@@ -9,7 +9,8 @@ export const Header = async () => {
     <div className="text-yellow-400 text-2xl font-bold">Eventify</div>
   </div>
   <div className="navbar-end">
-    <a className="btn bg-indigo-950 text-yellow-400" href="/auth/login p-4" >Login</a>
+    <p>Create event? </p>
+    <a className="btn bg-indigo-950 text-yellow-400 p-4" href="/auth/login">Login</a>
     <a className="btn bg-yellow-400" href="/auth/register">Register</a>
   </div>
 </header>
